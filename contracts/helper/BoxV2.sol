@@ -4,9 +4,6 @@ pragma solidity ^0.8.0;
 import "@openzeppelin/contracts/proxy/utils/Initializable.sol";
 import "@openzeppelin/contracts/proxy/utils/UUPSUpgradeable.sol";
 
-/**
- * storage layout inherited from {ERC1967Upgrade}
- */
 contract BoxV2 is Initializable, UUPSUpgradeable {
     uint256 private _value;
 
