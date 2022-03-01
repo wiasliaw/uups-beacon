@@ -15,7 +15,7 @@ Check out the architecture about beacon in transparent proxy.
                               +--------+
 ```
 
-Since UUPS' upgradeable logic is placed in logic contract, every `upgrade call` will setup new implementation address into proxy's storage. However, when beacon join, `upgrade call` should setup new implementation address in beacon, not proxy. Additionally, upgradeable logic will check the new implementation if it implements `proxiableUUID()`
+Since UUPS' upgradeable logic is placed in logic contract, every `upgrade call` will setup new implementation address into proxy's storage. However, when beacon join, `upgrade call` should setup new implementation address in beacon, not proxy. Additionally, upgradeable logic will check the new implementation if it implements `proxiableUUID()`, but beacon doesn't.
 
 
 ## Implementation about Beacon
