@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0;
+pragma solidity ^0.8.2;
 
 import "@openzeppelin/contracts/utils/Address.sol";
 import "@openzeppelin/contracts/proxy/Proxy.sol";
@@ -30,14 +30,11 @@ contract UUPSBeacon is Proxy, UUPSUpgradeable {
     {
         _authorizeUpgrade(newImplementation_);
         // delegate call to UUPS proxied
-        bytes memory payload = abi.encodeWithSignature(
-            "upgradeTo(address)",
-            newImplementation_
-        );
-        _getImplementation().functionDelegateCall(payload);
+        _fallback();
     }
 
     /// @dev override {UUPSUpgradeable}
+    /// @dev force function selector clashing
     function upgradeToAndCall(address newImplementation_, bytes memory data_)
         external
         payable
@@ -46,15 +43,11 @@ contract UUPSBeacon is Proxy, UUPSUpgradeable {
     {
         _authorizeUpgrade(newImplementation_);
         // delegate call to UUPS proxied
-        bytes memory payload = abi.encodeWithSignature(
-            "upgradeTo(address,bytes memory)",
-            newImplementation_,
-            data_
-        );
-        _getImplementation().functionDelegateCall(payload);
+        _fallback();
     }
 
     /// @dev override {UUPSUpgradeable}
+    /// @dev force function selector clashing
     function _authorizeUpgrade(address newImplementation)
         internal
         virtual
